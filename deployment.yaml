@@ -14,7 +14,9 @@ spec:
     spec:
       containers:
         - name: url-tools
-          image: ghcr.io/neltarim/urltool:master
+          image: ghcr.io/neltarim/urltools:master
           imagePullPolicy: Always
           ports:
             - containerPort: 80
+      imagePullSecrets:
+        - name: urltools-secret
