@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-tools
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: url-tools
+  template:
+    metadata:
+      labels:
+        app: url-tools
+    spec:
+      containers:
+        - name: url-tools
+          image: ghcr.io/neltarim/urltool:master
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
