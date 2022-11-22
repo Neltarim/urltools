@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: url-tools
+  name: url-tools-private
 spec:
   replicas: 1
   selector:
@@ -13,10 +13,10 @@ spec:
         app: url-tools
     spec:
       containers:
-        - name: url-tools
+        - name: urltools
           image: ghcr.io/neltarim/urltools:master
           imagePullPolicy: Always
           ports:
             - containerPort: 80
       imagePullSecrets:
-        - name: urltools-secret
+        - name: github-admin
