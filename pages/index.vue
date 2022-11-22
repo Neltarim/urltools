@@ -5,6 +5,7 @@
         <h1 class="text-4xl text-white mb-6">URL tool</h1>
         <p class="text-gray-300">Décomposez votre URL pour changer ses paramètres, visualiser une url complexe ou modifier son chemin</p>
         <p class="text-gray-300">Deployed with love on kubernetes !</p>
+        <p>test</p>
       </div>
       <h1 class="text-2xl text-white mb-6">Entrez votre url ici</h1>
       <input v-model="full" placeholder="https://github.com/Neltarim" class="w-full px-2 h-8 bg-slate-800 text-white border border-slate-500 rounded" type="text">
