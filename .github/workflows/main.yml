@@ -14,19 +14,29 @@ jobs:
     runs-on: ubuntu-latest  # windows-latest | macos-latest
     name: Test changed-files
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
+      - uses: actions/checkout@v2
 
-      - name: Get changed files in the front folder
-        id: changed-files-specific
-        uses: tj-actions/changed-files@v34
+      - name: Change text file
+        run: |
+          echo "Modified" > new.txt
+
+      - name: Change file in directory
+        run: |
+          echo "Changed" > test_directory/new.txt
+
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v12
+        id: verify-changed-files
         with:
           files: |
-            front/**
+             *.txt
+             test_directory
+             action.yml
+             **/*.py
+             **/*.jpeg
+             !*.sql
 
-      - name: Run step if any file(s) in the docs folder change
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
+      - name: Run step only when any of the above files change.
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
-          echo "One or more files in the docs folder has changed."
-          echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
+          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
